@@ -1,12 +1,12 @@
 import { fork } from 'redux-saga/effects'
 
 import routing from 'saga/routing'
-import bootstrap from 'saga/bootstrap'
+import session from 'saga/session'
 
 function *root() {
   // init
   yield fork(routing)
-  yield fork(bootstrap)
+  yield fork(session)
 }
 
 export default root

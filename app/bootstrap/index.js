@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
 
-import { bootstrap, settingWeb3 } from 'actions/bootstrap'
+import { bootstrap, settingWeb3 } from 'actions/session'
 import AppWrapper from 'containers/AppWrapper'
 import store from './store'
 

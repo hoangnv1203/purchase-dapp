@@ -1,10 +1,10 @@
 import { fork, take, put, select, race } from 'redux-saga/effects'
 
-import { BOOTSTRAP } from 'actions/bootstrap'
+import { SESSION } from 'actions/session'
 
 function* settingWeb3() {
   while (true) {
-    yield take(BOOTSTRAP.SETTINGWEB3)
+    yield take(SESSION.SETTINGWEB3)
     console.log('xxx')
   }
 }

@@ -9,8 +9,8 @@ import { SystemLayout } from 'decorators/Layout'
 import style from './style'
 
 @connect(state => ({
-  web3: state.bootstrap.web3,
-  contract: state.bootstrap.contract
+  web3: state.session.web3,
+  contract: state.session.contract
 }))
 @SystemLayout
 @Radium
