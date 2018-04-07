@@ -4,35 +4,44 @@ import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 
 import { SystemLayout } from 'decorators/Layout'
-
-import SignUpForm from './SignUpForm'
+import Form from './Form'
 import style from './style'
 
-@connect()
+@connect(state => ({
+  web3: state.bootstrap.web3,
+  contract: state.bootstrap.contract
+}))
 @SystemLayout
 @Radium
 class Contract extends React.Component {
   constructor(props) {
     super(props)
 
-    this._processSignUp = this._processSignUp.bind(this)
+    this._processDeposit = this._processDeposit.bind(this)
   }
 
   render() {
     return (
       <div style={style.wrapper}>
         <Helmet>
-          <title>Sign Up</title>
+          <title>Contracts</title>
         </Helmet>
         <div style={style.signUp}>
-          <SignUpForm onSubmit={this._processSignUp} />
+          <Form onSubmit={this._processDeposit} />
         </div>
       </div>
     )
   }
 
-  _processSignUp(credential) {
-    const { dispatch } = this.props
+  _processDeposit(data) {
+    const { web3, contract } = this.props
+
+    contract.sendMoney(data.address, data.shopId, data.amount, (err, result) => {
+      if (err) {
+        console.log('error', err)
+      }
+      console.log('Deposit success', result)
+    })
   }
 }
 

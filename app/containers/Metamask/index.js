@@ -9,7 +9,7 @@ import Redirect from 'components/Redirect'
 import ResponsiveBox from 'components/ResponsiveBox'
 import { SystemLayout } from 'decorators/Layout'
 
-import SignInForm from './SignInForm'
+import Form from './Form'
 import style from './style'
 
 @connect(state => ({
@@ -34,14 +34,14 @@ class Metamask extends React.Component {
     return (
       <div style={style.wrapper}>
         <Helmet>
-          <title>Sign In</title>
+          <title>Metamask</title>
         </Helmet>
         <div style={style.signIn}>
-          <SignInForm onSubmit={this._processSignIn} />
+          <Form onSubmit={this._processSignIn} />
         </div>
         <div style={style.promoteSignUp}>
           <p style={style.signUpQuestion}>
-            <b>This allows you to download different versions of private keys and re-print your paper wallet. You may want to do this in order to import your account into Geth/Mist. If you want to check your balance, we recommend using a blockchain explorer like etherscan.io.</b>
+            This allows you to download different versions of private keys and re-print your paper wallet. You may want to do this in order to import your account into Geth/Mist. If you want to check your balance, we recommend using a blockchain explorer like etherscan.io.
           </p>
         </div>
       </div>

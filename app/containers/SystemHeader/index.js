@@ -67,7 +67,7 @@ class SystemHeader extends React.Component {
 
     // if (signedIn) {
       return (
-        <figure style={style.logoIcon} onClick={this._redirect('/dashboard')}>
+        <figure style={style.logoIcon} onClick={this._redirect('/')}>
           <IconDashboard size={24} />
         </figure>
       )

@@ -11,7 +11,7 @@ import { form as style } from './style'
 
 @reduxForm({ form: 'signIn' })
 @Radium
-class SignInForm extends React.Component {
+class Form extends React.Component {
   render() {
     const { handleSubmit } = this.props
 
@@ -30,4 +30,4 @@ class SignInForm extends React.Component {
   }
 }
 
-export default SignInForm
+export default Form

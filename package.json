@@ -52,6 +52,7 @@
     "split-lines": "1.1.0",
     "superagent": "^3.8.1",
     "typeface-space-mono": "0.0.44",
+    "web3": "0.20.0",
     "webpack": "3.8.1"
   },
   "devDependencies": {
