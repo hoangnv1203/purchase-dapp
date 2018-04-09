@@ -9,22 +9,16 @@ import Redirect from 'components/Redirect'
 import ResponsiveBox from 'components/ResponsiveBox'
 import { SystemLayout } from 'decorators/Layout'
 import { decryptWallet } from 'actions/session'
+import { redirect } from 'actions/routing'
 
 import Form from './Form'
 import style from './style'
 
-@connect(state => ({
-  wallet: state.session.wallet
-}))
 @SystemLayout
 @Radium
 class PrivateKey extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      balance: 0,
-      address: null
-    }
 
     this._decryptWallet = this._decryptWallet.bind(this)
   }
@@ -43,12 +37,6 @@ class PrivateKey extends React.Component {
         </Helmet>
         <div style={style.signIn}>
           <Form onSubmit={this._decryptWallet} />
-          <p style={style.featureDesc}>
-            Balance: <span>{this.state.balance} ether</span>
-          </p>
-          <p style={style.featureDesc}>
-            Address: <span>{this.state.address}</span>
-          </p>
         </div>
         <div style={style.promoteSignUp}>
           <p style={style.signUpQuestion}>
@@ -62,14 +50,7 @@ class PrivateKey extends React.Component {
   _decryptWallet(fromData) {
     const { dispatch } = this.props
     dispatch(decryptWallet(fromData.key))
-
-    const { wallet } = this.props
-    if (wallet) {
-      this.setState({
-        balance: parseFloat(wallet.balance),
-        address: wallet.getAddressString()
-      })
-    }
+    dispatch(redirect('/contract'))
   }
 }
 

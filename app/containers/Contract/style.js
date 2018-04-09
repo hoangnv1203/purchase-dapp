@@ -8,6 +8,17 @@ export default prefix({
   },
   signUp: {
     ...columnLayout.column
+  },
+  signIn: {
+    ...columnLayout.column,
+    minWidth: '300px',
+  },
+  promoteSignUp: {
+    ...columnLayout.column,
+    minWidth: '300px'
+  },
+  signUpQuestion: {
+    marginBottom: '15px'
   }
 })
 
