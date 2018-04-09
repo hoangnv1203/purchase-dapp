@@ -9,7 +9,6 @@ import Redirect from 'components/Redirect'
 import ResponsiveBox from 'components/ResponsiveBox'
 import { SystemLayout } from 'decorators/Layout'
 import { connectMetamask } from 'actions/session'
-import { redirect } from 'actions/routing'
 
 import Form from './Form'
 import style from './style'
@@ -53,7 +52,6 @@ class Metamask extends React.Component {
   _processConnectToMetamask(credential) {
     const { dispatch } = this.props
     dispatch(connectMetamask())
-    dispatch(redirect('/contract'))
   }
 }
 

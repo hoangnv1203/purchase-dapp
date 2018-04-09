@@ -1,7 +1,7 @@
 import prefix from 'helpers/vendor-prefix'
 import { COLOR, FONT_SIZE } from 'styles/constants'
 import { columnLayout } from 'styles/layout'
-import logoBg from 'img/black_cloud.svg'
+import logoBg from 'img/logo.png'
 
 import buttonStyle from 'components/Button/style'
 
@@ -25,7 +25,7 @@ export default prefix({
     width: '120px',
     height: '75px',
     marginLeft: '-2px',
-    marginTop: '45px',
+    marginTop: '35px',
     backgroundImage: `url(${logoBg})`,
     backgroundRepeat: 'repeat-x',
     backgroundSize: 'auto 75px',

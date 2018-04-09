@@ -1,6 +1,7 @@
 import { fork, take, put, select, race, call } from 'redux-saga/effects'
 
 import { SESSION, createWeb3Wallet } from 'actions/session'
+import { redirect } from 'actions/routing'
 
 function getAccount() {
   if (!window.web3) return
@@ -13,9 +14,7 @@ function getAccount() {
 
       const address = accounts[0]
       const addressBuffer = Buffer.from(address.slice(2), 'hex')
-      setTimeout(function() {
-        return resolve(addressBuffer)
-      }, 2000)
+      return resolve(addressBuffer)
     })
   })
 }
@@ -31,6 +30,7 @@ function* connectMetamask() {
     yield take(SESSION.CONNECT_METAMASK)
     const addressBuffer = yield call(getAccount)
     yield put(createWeb3Wallet(addressBuffer))
+    yield put(redirect('/contract'))
   }
 }
 
