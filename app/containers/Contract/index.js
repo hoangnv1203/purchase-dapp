@@ -7,10 +7,13 @@ import { SystemLayout } from 'decorators/Layout'
 import Form from './Form'
 import style from './style'
 
+import AuthRequired from 'components/AuthRequired'
+
 @connect(state => ({
   web3: state.session.web3,
   contract: state.session.contract
 }))
+@AuthRequired
 @SystemLayout
 @Radium
 class Contract extends React.Component {

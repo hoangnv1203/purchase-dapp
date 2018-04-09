@@ -5,7 +5,6 @@ import { SESSION } from 'actions/session'
 function* settingWeb3() {
   while (true) {
     yield take(SESSION.SETTINGWEB3)
-    console.log('xxx')
   }
 }
 

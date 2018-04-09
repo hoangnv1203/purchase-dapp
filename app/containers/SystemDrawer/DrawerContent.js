@@ -12,8 +12,6 @@ class DrawerContent extends React.Component {
   }
 
   render() {
-    const { signedIn } = this.props
-
     return (
       <ul style={style.wrapper}>
         <li>
@@ -21,21 +19,17 @@ class DrawerContent extends React.Component {
             <span>Nexty purchase</span>
           </InternalLink>
         </li>
-        { signedIn ?
-            this._renderPersonalMenu() :
-            this._renderPublicMenu()
-        }
+        {this._renderPublicMenu()}
+        {this._renderPrivateMenu()}
       </ul>
     )
   }
 
   _renderPublicMenu() {
+    const { authorized } = this.props
+    if (authorized) return null
+
     return [
-      <li key="contract">
-        <InternalLink link="/contract" style={style.item}>
-          <span>Contract</span>
-        </InternalLink>
-      </li>,
       <li key="metamask">
         <InternalLink link="/metamask" style={style.item}>
           <span>MetaMask</span>
@@ -44,6 +38,19 @@ class DrawerContent extends React.Component {
       <li key="private-key">
         <InternalLink link="/private-key" style={style.item}>
           <span>Private Key</span>
+        </InternalLink>
+      </li>
+    ]
+  }
+
+  _renderPrivateMenu() {
+    const { authorized } = this.props
+    if (!authorized) return null
+
+    return [
+      <li key="contract">
+        <InternalLink link="/contract" style={style.item}>
+          <span>Contract</span>
         </InternalLink>
       </li>
     ]

@@ -5,7 +5,8 @@ import { CONST } from 'constants/index'
 
 const initialState = {
   contract: null,
-  web3: null
+  web3: null,
+  authorized: false
 }
 
 function settingWeb3() {
@@ -23,10 +24,17 @@ function settingWeb3() {
 
 function decryptWallet(privateKey, web3) {
   const wallet = new Wallet(privateKey)
+  let authorized = false
+
   wallet.balance = web3.eth.getBalance(wallet.getAddressString())
 
+  if (wallet.getAddressString()) {
+    authorized = true
+  }
+
   return {
-    wallet: wallet
+    wallet: wallet,
+    authorized: authorized
   }
 }
 

@@ -13,10 +13,13 @@ import DrawerBottom from './DrawerBottom'
 import { sideMenuStyle } from './style'
 
 const ReduxMenu = reduxBurgerMenu(Menu, LAYOUT.SYSTEM_MODE)
+@connect(state => ({
+  authorized: state.session.authorized
+}))
 
 class SystemDrawer extends React.PureComponent {
   render() {
-    const { dispatch, signedIn } = this.props
+    const { dispatch, authorized } = this.props
 
     return (
       <ReduxMenu right
@@ -25,7 +28,7 @@ class SystemDrawer extends React.PureComponent {
         styles={sideMenuStyle}
         customBurgerIcon={false}
         customCrossIcon={false}>
-        <DrawerContent signedIn={signedIn} dispatch={dispatch} />
+        <DrawerContent authorized={authorized} dispatch={dispatch} />
         <DrawerBottom />
       </ReduxMenu>
     )
