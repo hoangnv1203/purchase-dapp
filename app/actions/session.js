@@ -4,7 +4,10 @@ export const SESSION = prefix('session', {
   REQUEST: 'REQUEST',
   SUCCESS: 'SUCCESS',
   SETTINGWEB3: 'SETTINGWEB3',
-  DECRYPT_WALLET: 'DECRYPT_WALLET'
+  DECRYPT_WALLET: 'DECRYPT_WALLET',
+  CONNECT_METAMASK: 'CONNECT_METAMASK',
+  CREATE_WEB3WALLET: 'CREATE_WEB3WALLET',
+  SIGN_OUT: 'SIGN_OUT'
 })
 
 export function bootstrap() {
@@ -25,5 +28,26 @@ export function decryptWallet(privateKey) {
     payload: {
       privateKey: privateKey
     }
+  }
+}
+
+export function connectMetamask() {
+  return {
+    type: SESSION.CONNECT_METAMASK
+  }
+}
+
+export function createWeb3Wallet(addressBuffer) {
+  return {
+    type: SESSION.CREATE_WEB3WALLET,
+    payload: {
+      addressBuffer: addressBuffer
+    }
+  }
+}
+
+export function signOut() {
+  return {
+    type: SESSION.SIGN_OUT
   }
 }

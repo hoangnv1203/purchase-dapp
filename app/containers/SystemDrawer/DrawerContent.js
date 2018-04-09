@@ -1,14 +1,16 @@
 import Radium from 'radium'
 import React from 'react'
-
+import { redirect } from 'actions/routing'
+import { signOut } from 'actions/session'
 import { InternalLink } from 'components/Link'
-
 import { content as style } from './style'
 
 @Radium
 class DrawerContent extends React.Component {
   constructor(props) {
     super(props)
+
+    this._signOut = this._signOut.bind(this)
   }
 
   render() {
@@ -52,8 +54,18 @@ class DrawerContent extends React.Component {
         <InternalLink link="/contract" style={style.item}>
           <span>Contract</span>
         </InternalLink>
+      </li>,
+      <li key="sign-out">
+        <span style={style.item} onClick={this._signOut}>Sign out</span>
       </li>
     ]
+  }
+
+  _signOut() {
+    const { dispatch } = this.props
+
+    dispatch(signOut())
+    dispatch(redirect('/'))
   }
 }
 

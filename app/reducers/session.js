@@ -1,4 +1,5 @@
 import Web3 from 'web3'
+import Web3Wallet from 'helpers/web3wallet'
 import Wallet from 'helpers/wallet'
 import { SESSION } from 'actions/session'
 import { CONST } from 'constants/index'
@@ -40,6 +41,30 @@ function decryptWallet(privateKey, web3) {
   }
 }
 
+function getAuth() {
+  let authorized = false
+
+  if (window.web3) {
+    authorized = true
+  }
+
+  return {
+    authorized: authorized
+  }
+}
+
+function createWeb3Wallet(addressBuffer, web3) {
+  if (!window.web3) return null
+
+  let wallet = new Web3Wallet(addressBuffer)
+  wallet.balance = web3.eth.getBalance(wallet.getAddressString())
+
+  return {
+    wallet: wallet,
+    authorized: true
+  }
+}
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case SESSION.SUCCESS: {
@@ -56,6 +81,19 @@ export default function(state = initialState, action) {
       return {
         ...state,
         ...decryptWallet(action.payload.privateKey, state.web3)
+      }
+
+    case SESSION.CREATE_WEB3WALLET:
+      return {
+        ...state,
+        ...createWeb3Wallet(action.payload.addressBuffer, state.web3)
+      }
+
+    case SESSION.SIGN_OUT:
+      return {
+        ...state,
+        authorized: false,
+        wallet: null
       }
   }
 

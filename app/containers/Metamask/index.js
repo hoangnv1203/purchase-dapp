@@ -8,6 +8,8 @@ import { InternalLink } from 'components/Link'
 import Redirect from 'components/Redirect'
 import ResponsiveBox from 'components/ResponsiveBox'
 import { SystemLayout } from 'decorators/Layout'
+import { connectMetamask } from 'actions/session'
+import { redirect } from 'actions/routing'
 
 import Form from './Form'
 import style from './style'
@@ -21,7 +23,7 @@ class Metamask extends React.Component {
   constructor(props) {
     super(props)
 
-    this._processSignIn = this._processSignIn.bind(this)
+    this._processConnectToMetamask = this._processConnectToMetamask.bind(this)
   }
 
   render() {
@@ -37,7 +39,7 @@ class Metamask extends React.Component {
           <title>Metamask</title>
         </Helmet>
         <div style={style.signIn}>
-          <Form onSubmit={this._processSignIn} />
+          <Form onSubmit={this._processConnectToMetamask} />
         </div>
         <div style={style.promoteSignUp}>
           <p style={style.signUpQuestion}>
@@ -48,8 +50,10 @@ class Metamask extends React.Component {
     )
   }
 
-  _processSignIn(credential) {
+  _processConnectToMetamask(credential) {
     const { dispatch } = this.props
+    dispatch(connectMetamask())
+    dispatch(redirect('/contract'))
   }
 }
 

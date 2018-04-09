@@ -1,8 +1,11 @@
 import ethUtil from 'ethereumjs-util'
 
 export default function Wallet(priv, pub) {
-  this.privKey = priv.length == 32 ? priv : Buffer(priv, 'hex')
+  if (typeof priv != 'undefined') {
+    this.privKey = priv.length == 32 ? priv : Buffer(priv, 'hex')
+  }
   this.pubKey = pub
+  this.type = 'default'
 }
 
 Wallet.prototype.getPublicKey = (() => {
