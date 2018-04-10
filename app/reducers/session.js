@@ -8,7 +8,8 @@ const initialState = {
   contract: null,
   web3: null,
   authorized: false,
-  wallet: null
+  wallet: null,
+  isMetamask: false
 }
 
 function settingWeb3() {
@@ -61,7 +62,8 @@ function createWeb3Wallet(addressBuffer, web3) {
 
   return {
     wallet: wallet,
-    authorized: true
+    authorized: true,
+    isMetamask: true
   }
 }
 
@@ -93,7 +95,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         authorized: false,
-        wallet: null
+        wallet: null,
+        isMetamask: false
       }
   }
 

@@ -18,7 +18,7 @@ export default function(Component) {
       return (
         authorized ?
         <Component { ...this.props } { ...this.state } /> :
-        <Redirect path="/private-key" />
+        <Redirect path="/metamask" />
       )
     }
   }

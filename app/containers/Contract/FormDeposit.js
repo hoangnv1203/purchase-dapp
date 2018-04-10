@@ -8,41 +8,27 @@ import ResponsiveBox from 'components/ResponsiveBox'
 
 import { form as style } from './style'
 
-@reduxForm({ form: 'contract' })
+@reduxForm({ form: 'fromdeposit' })
 @Radium
-class Form extends React.Component {
+class FormDeposit extends React.Component {
   render() {
-    const { handleSubmit } = this.props
+    const { handleSubmit, contract } = this.props
 
     return (
       <form onSubmit={handleSubmit}>
         <p style={style.row}>
-          <span>Handle payment online</span>
+          Deposit to smart contract: {contract.address}
         </p>
         <div style={style.row}>
           <Field component={TextBox}
             type="text"
-            name="address"
-            placeholder="Wallet address"
-          />
-        </div>
-        <div style={style.row}>
-          <Field component={TextBox}
-            type="text"
-            name="shopId"
-            placeholder="Shop Id"
-          />
-        </div>
-        <div style={style.row}>
-          <Field component={TextBox}
-            type="text"
             name="amount"
-            placeholder="Amount"
+            placeholder="Amount of Ether"
           />
         </div>
         <div style={style.row}>
           <ResponsiveBox>
-            <Button type="submit">Pay</Button>
+            <Button type="submit">Deposit</Button>
           </ResponsiveBox>
         </div>
       </form>
@@ -50,4 +36,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form
+export default FormDeposit
