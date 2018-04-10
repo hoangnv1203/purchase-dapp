@@ -36,6 +36,7 @@ class Contract extends React.Component {
     this._processDeposit = this._processDeposit.bind(this)
     this._sendTxWithMetamask = this._sendTxWithMetamask.bind(this)
     this._sendRawTx = this._sendRawTx.bind(this)
+    this._processPaymentByContract = this._processPaymentByContract.bind(this)
   }
 
   componentDidMount() {
@@ -94,6 +95,17 @@ class Contract extends React.Component {
     )
   }
 
+  _processPaymentByContract(data) {
+    const { web3, contract } = this.props
+    contract.buyerDepositToContract({
+      value: web3.toWei(data.amount, 'ether'),
+      gas: 2000000
+    }, (err, data) => {
+      console.log('error', err)
+      console.log('data', data)
+    })
+  }
+
   _processPayment(data) {
     const { web3, contract } = this.props
 
@@ -112,12 +124,12 @@ class Contract extends React.Component {
 
   _processDeposit(data) {
     const { isMetamask } = this.props
-
-    if (isMetamask) {
-      this._sendTxWithMetamask(data)
-    } else {
-      this._sendRawTx(data)
-    }
+    this._processPaymentByContract(data)
+    // if (isMetamask) {
+    //   this._sendTxWithMetamask(data)
+    // } else {
+    //   this._sendRawTx(data)
+    // }
   }
 
   _sendTxWithMetamask(data) {
